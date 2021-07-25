@@ -36,11 +36,22 @@ export class AppService {
     }
   }
 
-  async consultarCategoriaPeloId(categoria: string): Promise<Categoria> {
+  async consultarCategoriaPeloId(_id: string): Promise<Categoria> {
     try {
-      return this.categoriaModel.findOne({ categoria }).exec();
+      return this.categoriaModel.findOne({ _id }).exec();
     } catch (error) {
       this.logger.error(`Error: ${JSON.stringify(error.message)}`);
+      throw new RpcException(error.message);
+    }
+  }
+
+  async atualizarCategoria(_id: string, categoria: Categoria): Promise<void> {
+    try {
+      await this.categoriaModel
+        .findOneAndUpdate({ _id }, { $set: categoria })
+        .exec();
+    } catch (error) {
+      this.logger.error(JSON.stringify(error));
       throw new RpcException(error.message);
     }
   }

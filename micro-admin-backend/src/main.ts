@@ -10,6 +10,7 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: ['amqp://user:bitnami@localhost:5672/smartranking'],
+      noAck: false,
       queue: 'admin-backend',
     },
   });
