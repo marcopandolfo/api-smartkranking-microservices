@@ -3,9 +3,18 @@ import { CategoriasModule } from './categorias/categorias.module';
 import { ProxyrmqModule } from './proxyrmq/proxyrmq.module';
 import { JogadoresModule } from './jogadores/jogadores.module';
 import { AwsModule } from './aws/aws.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CategoriasModule, ProxyrmqModule, JogadoresModule, AwsModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    CategoriasModule,
+    ProxyrmqModule,
+    JogadoresModule,
+    AwsModule,
+  ],
   controllers: [],
   providers: [],
 })

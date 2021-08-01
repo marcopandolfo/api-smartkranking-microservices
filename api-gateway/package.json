@@ -22,11 +22,13 @@
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
+    "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^7.0.0",
     "@nestjs/microservices": "^7.6.17",
     "@nestjs/platform-express": "^7.0.0",
     "amqp-connection-manager": "^3.2.2",
     "amqplib": "^0.8.0",
+    "aws-sdk": "^2.958.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "moment-timezone": "^0.5.33",
