@@ -1,5 +1,5 @@
 import { Controller, Logger } from '@nestjs/common';
-import { AppService } from './app.service';
+import { CategoriasService } from './categorias.service';
 import {
   Payload,
   EventPattern,
@@ -7,15 +7,15 @@ import {
   Ctx,
   RmqContext,
 } from '@nestjs/microservices';
-import { Categoria } from './interfaces/categorias/categoria.interface';
+import { Categoria } from './interfaces/categoria.interface';
 
 const ackErrors = ['E11000']; // mongodb duplicated index
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class CategoriasController {
+  constructor(private readonly categoriasService: CategoriasService) {}
 
-  private readonly logger = new Logger(AppController.name);
+  private readonly logger = new Logger(CategoriasController.name);
 
   @EventPattern('criar-categoria')
   async criarCategoria(
@@ -28,7 +28,7 @@ export class AppController {
     this.logger.log(`Categoria: ${JSON.stringify(categoria)}`);
 
     try {
-      await this.appService.criarCategoria(categoria);
+      await this.categoriasService.criarCategoria(categoria);
       await channel.ack(originalMessage);
     } catch (error) {
       this.logger.error(`error: ${JSON.stringify(error)}`);
@@ -53,10 +53,10 @@ export class AppController {
 
     try {
       if (_id) {
-        return await this.appService.consultarCategoriaPeloId(_id);
+        return await this.categoriasService.consultarCategoriaPeloId(_id);
       }
 
-      return await this.appService.consultarTodasCategorias();
+      return await this.categoriasService.consultarTodasCategorias();
     } finally {
       await channel.ack(originalMessage);
     }
@@ -73,7 +73,7 @@ export class AppController {
       const _id: string = data.id;
       const categoria: Categoria = data.categoria;
 
-      await this.appService.atualizarCategoria(_id, categoria);
+      await this.categoriasService.atualizarCategoria(_id, categoria);
       await channel.ack(originalMessage);
     } catch (error) {
       const filteredAckError = ackErrors.filter(ackError =>
