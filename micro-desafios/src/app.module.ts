@@ -7,7 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/sradminbackend', {
+    MongooseModule.forRoot('mongodb://localhost/srdesafios', {
       useNewUrlParser: false,
       useCreateIndex: true,
       useUnifiedTopology: true,
