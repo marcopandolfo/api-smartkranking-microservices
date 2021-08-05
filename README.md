@@ -1,1 +1,1 @@
-api-smartranking-microservices
+WIP: Projeto do curso de <a href="https://www.udemy.com/course/construindo-um-backend-escalavel-com-nestjs-aws-e-pivotalws/" target="_blank">Node.js Microservices: NestJS, RabbitMQ and Cloud Services</a>
